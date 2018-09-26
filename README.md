@@ -1,27 +1,23 @@
 # NgTasks
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3. for the purposes of a interview project for Mobelux
 
-## Development server
+# Pre-Req
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Ensure you have latest versions of Node and Npm installed as well as the Angular CLI
+https://nodejs.org/en/ 
+https://cli.angular.io/
 
-## Code scaffolding
+Developed with
+Node -v: v8.12.0
+NPM -v: 6.4.1
+Angular CLI: 6.2.3
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# Run Locally
 
-## Build
+Navigate to root of the project (ex. projects/ng-task) and follow these steps
+1) Run npm install (will download all dependencies and create a node_modules dir at the root of the project)
+2) Run ng serve
+3) Go to http://localhost:4200/ on your browser
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
