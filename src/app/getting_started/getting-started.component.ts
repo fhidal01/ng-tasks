@@ -18,9 +18,11 @@ export class GettingStartedComponent {
     const appData = this.cookiesService.getObject('ngTasks') as AppCookieStorage;
 
     if (appData === undefined) {
-      const listId = Math.floor((Math.random() * 1000000) + 1).toString();
+      const listId = Date.now().toString();
       this.cookiesService.putObject('ngTasks', new AppCookieStorage(listId, new Array<ParentTask>()));
       this.router.navigate(['../list', listId]);
+    } else {
+      this.router.navigate(['../list', Object.keys(appData)[0]]);
     }
   }
 }
