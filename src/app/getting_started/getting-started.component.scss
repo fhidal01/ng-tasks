@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+@import '../../styles/mixins';
+
+#container {
+    margin-right: -15px;
+    margin-left: -15px;
+
+
+    .col {
+        width: 100%;
+        position: relative;
+        min-height: 1px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .image {
+        width: 100%;
+        max-width: 750px;
+        text-align: center;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .button {
+        width: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+}
