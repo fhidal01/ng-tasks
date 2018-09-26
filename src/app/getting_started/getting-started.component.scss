@@ -17,6 +17,14 @@
     .image {
         width: 100%;
         max-width: 750px;
+        margin-left: auto;
+        margin-right: auto;
+        display: block;
+    }
+
+    .message {
+        width: 100%;
+        max-width: 270px;
         text-align: center;
         margin-left: auto;
         margin-right: auto;
