@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { TasksContainerComponent } from './app.component';
 import { GettingStartedComponent } from './getting_started/getting-started.component';
+import { TaskListComponent } from './task_list/task-list.component';
 
 const routes: Routes = [
     {
-        path: '**',
+        path: '',
         redirectTo: '/started',
         pathMatch: 'full'
     },
@@ -14,7 +14,12 @@ const routes: Routes = [
         path: 'started',
         component: GettingStartedComponent,
         pathMatch: 'full'
-    }
+    },
+    {
+        path: 'list/:id',
+        component: TaskListComponent,
+        pathMatch: 'full'
+    },
 ];
 
 @NgModule({
@@ -23,4 +28,7 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 
-export const routableComponents = [GettingStartedComponent];
+export const routableComponents = [
+    GettingStartedComponent,
+    TaskListComponent
+];
