@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { CookieService } from 'ngx-cookie';
 
@@ -11,7 +12,7 @@ import { TaskList } from '../classes/TaskList';
 export class TaskHttpService {
     private APP_DATA_KEY = 'ngTask';
 
-    constructor(private cookiesService: CookieService) {
+    constructor(private cookiesService: CookieService, private router: Router) {
     }
 
     public doesUserHaveTasks(): Promise<boolean> {
@@ -45,6 +46,10 @@ export class TaskHttpService {
     public getTaskList(taskListId: string): Promise<TaskList> {
         return new Promise<TaskList>(resolve => {
             const appData = this.cookiesService.getObject(this.APP_DATA_KEY) as AppCookieStorage;
+
+            if (appData === undefined || appData[taskListId] === undefined) {
+                this.router.navigate(['started']);
+            }
             resolve(this.toInstance<TaskList>(new TaskList(taskListId), JSON.stringify(appData[taskListId])));
         }).then((result) => {
             return result;

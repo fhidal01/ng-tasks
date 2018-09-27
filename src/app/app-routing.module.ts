@@ -20,6 +20,7 @@ const routes: Routes = [
         component: TaskListComponent,
         pathMatch: 'full'
     },
+    { path: '**', pathMatch: 'full', redirectTo: '/started'}
 ];
 
 @NgModule({

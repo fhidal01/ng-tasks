@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { TaskHttpService } from '../services/task-http.service';
 
-import { AppCookieStorage } from '../classes/AppCookieStorage';
-import { ParentTask } from '../classes/ParentTask';
-import { TaskList } from '../classes/TaskList';
 @Component({
   selector: 'app-getting-started',
   templateUrl: './getting-started.component.html',
