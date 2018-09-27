@@ -1,12 +1,23 @@
 <div id="container" *ngIf="currentTaskList != undefined">
-  <div class="col">
-     {{currentTaskList.name}}
+  <div class="col header">
+    {{currentTaskList.name}}
   </div>
-  <div class="col" *ngIf="currentTaskList.tasks.length == 0">
-      <img class="image" src="src/assets/fresh-start.png">
+  <div class="col body" *ngIf="currentTaskList.tasks.length == 0">
+    <img class="image" src="src/assets/fresh-start.png">
   </div>
-  <div class="col" *ngIf="currentTaskList.tasks.length > 0">
-      Display List
+  <div class="col body" *ngIf="currentTaskList.tasks.length > 0">
+    Display List
   </div>
-
+  <div class="footer">
+    <div class="menu">
+        <img class="icon" src="src/assets/menu.svg">
+    </div>
+    <div class="new-task-button">
+      <img class="icon" src="src/assets/add.svg">
+      Add a new task
+    </div>
+    <div class="more">
+      <img class="icon" src="src/assets/more.svg">
+    </div>
+  </div>
 </div>

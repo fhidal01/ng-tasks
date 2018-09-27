@@ -2,34 +2,75 @@
 @import '../../styles/mixins';
 
 #container {
-    margin-right: -15px;
-    margin-left: -15px;
-
-
     .col {
-        width: 100%;
-        position: relative;
-        min-height: 1px;
-        padding-right: 15px;
-        padding-left: 15px;
+        @include col();
     }
 
-    .image {
-        width: 100%;
-        max-width: 750px;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
-    }
-
-    .message {
-        width: 100%;
-        max-width: 270px;
+    .header {
         text-align: center;
-        margin-left: auto;
-        margin-right: auto;
-        display: block;
     }
+
+    .body {
+        .image{
+            @include tengyulab-image(558px);
+        }
+    }
+
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        color: white;
+        text-align: center;
+        height: 60px;
+        color: black;
+        box-shadow: 0 -8px 10px -6px #dedcdc;
+
+        .helper {
+            display: inline-block;
+            height: 100%;
+            vertical-align: middle;
+        }
+
+        .menu {
+            float: left;
+            line-height: 60px;
+            margin-left: 15px;
+        }
+        .more {
+            float: right;
+            line-height: 60px;
+            margin-right: 15px;
+        }
+
+        .icon {
+            vertical-align: middle;
+        }
+
+        .new-task-button {
+            cursor: pointer;
+            display: block;
+            background-color: #4285EF;
+            color: white;
+            position: fixed;
+            margin-top: -25px;
+            margin-left: -60px;
+            left: 50%;
+            height: 30px;
+            padding: 10px;
+            line-height: 30px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 200px;
+
+            .icon {
+                color: white;
+            }
+        }
+    }
+
+
 
     .button {
         width: 100px;

@@ -1,0 +1,32 @@
+@mixin row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+@mixin col {
+    //width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+@mixin tengyulab-image($maxWidth) {
+    width: 100%;
+    max-width: $maxWidth;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+@mixin floatLeft {
+    .float-left {
+        float: left;
+    }
+}
+
+@mixin floatRight {
+    .float-left {
+        float: right;
+    }
+}
