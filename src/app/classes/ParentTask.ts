@@ -5,5 +5,6 @@ export class ParentTask extends Task {
 
     constructor() {
         super();
+        this.subTasks = new Array<Task>();
     }
 }

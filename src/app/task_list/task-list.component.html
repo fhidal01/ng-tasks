@@ -1,4 +1,4 @@
-<div id="container" *ngIf="currentTaskList != undefined">
+<div id="container" [class.out-of-focus]="addingNewtask" *ngIf="currentTaskList != undefined">
   <div class="col header">
     {{currentTaskList.name}}
   </div>
@@ -8,18 +8,35 @@
     <p>Anything to add?</p>
   </div>
   <div class="col body" *ngIf="currentTaskList.tasks.length > 0">
-    Display List
+    <p *ngFor="let task of currentTaskList.tasks">{{task.name}}</p>
   </div>
   <div class="footer">
     <div class="menu">
-        <img class="icon" src="src/assets/menu.svg">
+      <img class="icon" src="src/assets/menu.svg">
     </div>
-    <div class="new-task-button">
+    <div class="new-task-button" (click)="addNewTask()">
       <img class="icon" src="src/assets/add.svg">
-      Add a new task
+      <span>Add a new task</span>
     </div>
     <div class="more">
       <img class="icon" src="src/assets/more.svg">
     </div>
+  </div>
+</div>
+<div class="new-task" [class.open]="addingNewtask" *ngIf="addingNewtask">
+  <div class="col input">
+    <input type="text" placeholder="New task" [(ngModel)]="newTask.name"/>
+  </div>
+
+  <div class="col actions">
+
+    <div class="more-options">
+      <img class="icon" src="src/assets/add-circle.svg">
+    </div>
+
+    <div class="save">
+      <span (click)="save()">Save</span>
+    </div>
+
   </div>
 </div>

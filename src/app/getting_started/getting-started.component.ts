@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { CookieService } from 'ngx-cookie';
+import { TaskHttpService } from '../services/task-http.service';
 
 import { AppCookieStorage } from '../classes/AppCookieStorage';
 import { ParentTask } from '../classes/ParentTask';
@@ -12,18 +12,28 @@ import { TaskList } from '../classes/TaskList';
   styleUrls: ['./getting-started.component.scss']
 })
 export class GettingStartedComponent {
-  constructor(private router: Router, private cookiesService: CookieService) {}
+  constructor(private router: Router, private taskHttpClient: TaskHttpService) { }
 
-  public getStarted () {
-    console.log('hitting');
-    const appData = this.cookiesService.getObject('ngTasks') as AppCookieStorage;
+  public getStarted() {
 
-    if (appData === undefined) {
-      const listId = Date.now().toString();
-      this.cookiesService.putObject('ngTasks', new AppCookieStorage(listId, new TaskList(listId)));
-      this.router.navigate(['../list', listId]);
-    } else {
-      this.router.navigate(['../list', Object.keys(appData)[0]]);
-    }
+    this.taskHttpClient.doesUserHaveTasks().then(
+      (taskExist: boolean) => {
+        debugger;
+        if (taskExist) {
+          this.taskHttpClient.getFirstTaskListId().then(
+            (id: string) => {
+              this.router.navigate(['../list', id]);
+            }
+          );
+        } else {
+          this.taskHttpClient.initializeAppDataWithEmptyTaskList().then(
+            (listId: string) => {
+              this.router.navigate(['../list', listId]);
+            }
+          );
+        }
+      }
+    );
+
   }
 }

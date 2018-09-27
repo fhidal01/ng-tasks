@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { CookieService } from 'ngx-cookie';
+import { TaskHttpService } from '../services/task-http.service';
+
 import { AppCookieStorage } from '../classes/AppCookieStorage';
 import { TaskList } from '../classes/TaskList';
+import { ParentTask } from '../classes/ParentTask';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
@@ -11,9 +13,11 @@ import { TaskList } from '../classes/TaskList';
 })
 export class TaskListComponent implements OnInit {
 
+  public addingNewtask = false;
   public currentTaskList: TaskList;
+  public newTask: ParentTask;
 
-  constructor(private cookiesService: CookieService, private currentRoute: ActivatedRoute) { }
+  constructor(private currentRoute: ActivatedRoute, private taskHttpService: TaskHttpService) { }
 
   ngOnInit(): void {
     let taskListId: string | null;
@@ -22,10 +26,28 @@ export class TaskListComponent implements OnInit {
         taskListId = params.get('id');
       });
     }
-    const appData = this.cookiesService.getObject('ngTasks') as AppCookieStorage;
 
-    this.currentTaskList = appData[taskListId];
-    console.log(appData);
+    this.taskHttpService.getTaskList(taskListId).then(
+      (taskList: TaskList) => {
+        this.currentTaskList = taskList;
+      }
+    );
     console.log(this.currentTaskList);
+  }
+
+  public addNewTask() {
+    this.newTask = new ParentTask();
+    this.addingNewtask = true;
+  }
+
+  public save() {
+    console.log(this.newTask);
+
+    this.taskHttpService.saveTask(this.currentTaskList.id, this.newTask).then(
+      (savedTask: ParentTask) => {
+        this.currentTaskList.tasks.push(savedTask);
+      }
+    );
+    this.addingNewtask = false;
   }
 }

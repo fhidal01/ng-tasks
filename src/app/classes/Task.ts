@@ -5,5 +5,8 @@ export class Task {
     additionalDetails: string;
     completed: boolean;
 
-    constructor() {}
+    constructor() {
+        this.id = Date.now().toString();
+        this.completed = false;
+    }
 }
