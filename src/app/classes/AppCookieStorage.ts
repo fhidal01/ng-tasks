@@ -1,9 +1,10 @@
 import { ParentTask } from './ParentTask';
+import { TaskList } from './TaskList';
 
 export class AppCookieStorage {
-    [key: string]: Array<ParentTask>;
+    [key: string]: TaskList;
 
-    constructor(key: string, taskList: Array<ParentTask>) {
+    constructor(key: string, taskList: TaskList) {
         this[key] = taskList;
     }
 }

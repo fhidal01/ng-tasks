@@ -5,6 +5,7 @@ import { CookieService } from 'ngx-cookie';
 
 import { AppCookieStorage } from '../classes/AppCookieStorage';
 import { ParentTask } from '../classes/ParentTask';
+import { TaskList } from '../classes/TaskList';
 @Component({
   selector: 'app-getting-started',
   templateUrl: './getting-started.component.html',
@@ -19,7 +20,7 @@ export class GettingStartedComponent {
 
     if (appData === undefined) {
       const listId = Date.now().toString();
-      this.cookiesService.putObject('ngTasks', new AppCookieStorage(listId, new Array<ParentTask>()));
+      this.cookiesService.putObject('ngTasks', new AppCookieStorage(listId, new TaskList(listId)));
       this.router.navigate(['../list', listId]);
     } else {
       this.router.navigate(['../list', Object.keys(appData)[0]]);
