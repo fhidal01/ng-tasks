@@ -1,15 +1,27 @@
 <div id="container" [class.out-of-focus]="addingNewtask" *ngIf="currentTaskList != undefined">
+
   <div class="col header">
     {{currentTaskList.name}}
   </div>
-  <div class="col body" *ngIf="currentTaskList.tasks.length == 0">
+
+  <div class="col body empty" *ngIf="currentTaskList.tasks.length == 0">
     <img class="image" src="src/assets/fresh-start.png">
     <p><strong>A fresh start</strong></p>
     <p>Anything to add?</p>
   </div>
+
   <div class="col body" *ngIf="currentTaskList.tasks.length > 0">
-    <p *ngFor="let task of currentTaskList.tasks">{{task.name}}</p>
+    <div class="col task" *ngFor="let task of currentTaskList.tasks">
+      <div class="status">
+        <input type="checkbox" [checked]="task.completed" (click)="toggleTaskStatus(task)">
+      </div>
+      <div class="name">
+        {{task.name}}
+      </div>
+
+    </div>
   </div>
+
   <div class="footer">
     <div class="menu">
       <img class="icon" src="src/assets/menu.svg">
@@ -18,18 +30,18 @@
       <img class="icon" src="src/assets/add.svg">
       <span>Add a new task</span>
     </div>
-    <div class="more">
-      <img class="icon" src="src/assets/more.svg">
+    <div class="more" (click)="print()">
+      <img class="icon" src="src/assets/more.svg" >
     </div>
   </div>
 </div>
+
 <div class="new-task" [class.open]="addingNewtask" *ngIf="addingNewtask">
   <div class="col input">
-    <input type="text" placeholder="New task" [(ngModel)]="newTask.name"/>
+    <input type="text" placeholder="New task" [(ngModel)]="newTask.name" />
   </div>
 
   <div class="col actions">
-
     <div class="more-options">
       <img class="icon" src="src/assets/add-circle.svg">
     </div>
@@ -37,6 +49,5 @@
     <div class="save">
       <span (click)="save()">Save</span>
     </div>
-
   </div>
 </div>

@@ -41,13 +41,27 @@ export class TaskListComponent implements OnInit {
   }
 
   public save() {
-    console.log(this.newTask);
+    if (this.isNewTaskValid()) {
+      this.taskHttpService.saveTask(this.currentTaskList.id, this.newTask).then(
+        (savedTask: ParentTask) => {
+          this.currentTaskList.tasks.push(savedTask);
+        }
+      );
+    }
 
-    this.taskHttpService.saveTask(this.currentTaskList.id, this.newTask).then(
-      (savedTask: ParentTask) => {
-        this.currentTaskList.tasks.push(savedTask);
-      }
-    );
     this.addingNewtask = false;
+  }
+
+  public toggleTaskStatus(task: ParentTask) {
+    task.completed = !task.completed;
+    this.taskHttpService.toggleTaskStatus(this.currentTaskList.id, task);
+  }
+
+  private isNewTaskValid() {
+    return this.newTask.name !== undefined && this.newTask.name.trim().length > 0;
+  }
+
+  print() {
+    console.log(this.currentTaskList);
   }
 }

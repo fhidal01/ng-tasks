@@ -61,4 +61,18 @@ export class TaskHttpService {
             return result;
         });
     }
+
+    public toggleTaskStatus(taskListId: string, task: ParentTask): Promise<ParentTask> {
+        return new Promise<ParentTask>(resolve => {
+            const appData = this.cookiesService.getObject(this.APP_DATA_KEY) as AppCookieStorage;
+            const indexOfTaskToToggle = appData[taskListId].tasks.findIndex(originalTask => {
+                return originalTask.id === task.id;
+            });
+            appData[taskListId].tasks[indexOfTaskToToggle].completed = task.completed;
+            this.cookiesService.putObject(this.APP_DATA_KEY, appData);
+            resolve(task);
+        }).then((result) => {
+            return result;
+        });
+    }
 }
