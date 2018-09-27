@@ -18,7 +18,6 @@ export class GettingStartedComponent {
 
     this.taskHttpClient.doesUserHaveTasks().then(
       (taskExist: boolean) => {
-        debugger;
         if (taskExist) {
           this.taskHttpClient.getFirstTaskListId().then(
             (id: string) => {

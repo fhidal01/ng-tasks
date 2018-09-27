@@ -31,7 +31,7 @@ export class TaskListComponent implements OnInit {
 
     this.taskHttpService.getTaskList(taskListId).then(
       (taskList: TaskList) => {
-        this.update(taskList);
+        this.updateTaskLists(taskList);
       }
     );
 
@@ -58,13 +58,13 @@ export class TaskListComponent implements OnInit {
     task.completed = !task.completed;
     this.taskHttpService.toggleTaskStatus(this.currentTaskList.id, task).then(
       (taskList: TaskList) => {
-        this.update(taskList);
+        this.updateTaskLists(taskList);
       }
     );
 
   }
 
-  private update(taskList: TaskList) {
+  private updateTaskLists(taskList: TaskList) {
     this.currentTaskList = taskList;
     const grouped = this.currentTaskList.groupByCompletionStatus();
     this.completedTasks = grouped[true] ? grouped[true] : new Array<ParentTask>();
@@ -76,7 +76,4 @@ export class TaskListComponent implements OnInit {
     return this.newTask.name !== undefined && this.newTask.name.trim().length > 0;
   }
 
-  print() {
-    console.log(this.currentTaskList);
-  }
 }

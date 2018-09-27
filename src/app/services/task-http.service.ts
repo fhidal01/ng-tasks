@@ -80,7 +80,7 @@ export class TaskHttpService {
     private toInstance<T>(obj: T, json: string): T {
         const jsonObj = JSON.parse(json);
 
-        for ( let propName of Object.keys(jsonObj) ) {
+        for ( const propName of Object.keys(jsonObj) ) {
             obj[propName] = jsonObj[propName];
         }
         return obj;

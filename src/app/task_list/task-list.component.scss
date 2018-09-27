@@ -122,8 +122,22 @@
         background-color: white;
     }
 
-    .input {
-        height: 100px;;
+    .name-input {
+        height: 100px;
+
+        input {
+            margin-left: 50px;
+            float: left;
+            margin-top: 20px;
+            width: 90%;
+            padding: 10px;
+            border: none;
+            font-size: 16px;
+
+            &:focus {
+                outline: 0;
+            }
+        }
     }
 
     .actions {
