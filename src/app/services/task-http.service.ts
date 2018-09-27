@@ -23,7 +23,7 @@ export class TaskHttpService {
         });
     }
 
-    public getFirstTaskListId(): Promise<string>  {
+    public getFirstTaskListId(): Promise<string> {
         return new Promise<string>(resolve => {
             const appData = this.cookiesService.getObject(this.APP_DATA_KEY) as AppCookieStorage;
             resolve(Object.keys(appData)[0]);
@@ -45,7 +45,7 @@ export class TaskHttpService {
     public getTaskList(taskListId: string): Promise<TaskList> {
         return new Promise<TaskList>(resolve => {
             const appData = this.cookiesService.getObject(this.APP_DATA_KEY) as AppCookieStorage;
-            resolve(appData[taskListId]);
+            resolve(this.toInstance<TaskList>(new TaskList(taskListId), JSON.stringify(appData[taskListId])));
         }).then((result) => {
             return result;
         });
@@ -62,17 +62,27 @@ export class TaskHttpService {
         });
     }
 
-    public toggleTaskStatus(taskListId: string, task: ParentTask): Promise<ParentTask> {
-        return new Promise<ParentTask>(resolve => {
+    public toggleTaskStatus(taskListId: string, task: ParentTask): Promise<TaskList> {
+        return new Promise<TaskList>(resolve => {
             const appData = this.cookiesService.getObject(this.APP_DATA_KEY) as AppCookieStorage;
             const indexOfTaskToToggle = appData[taskListId].tasks.findIndex(originalTask => {
                 return originalTask.id === task.id;
             });
             appData[taskListId].tasks[indexOfTaskToToggle].completed = task.completed;
             this.cookiesService.putObject(this.APP_DATA_KEY, appData);
-            resolve(task);
+
+            resolve(this.toInstance<TaskList>(new TaskList(taskListId), JSON.stringify(appData[taskListId])));
         }).then((result) => {
             return result;
         });
+    }
+
+    private toInstance<T>(obj: T, json: string): T {
+        const jsonObj = JSON.parse(json);
+
+        for ( let propName of Object.keys(jsonObj) ) {
+            obj[propName] = jsonObj[propName];
+        }
+        return obj;
     }
 }

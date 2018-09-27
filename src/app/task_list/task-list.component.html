@@ -4,14 +4,14 @@
     {{currentTaskList.name}}
   </div>
 
-  <div class="col body empty" *ngIf="currentTaskList.tasks.length == 0">
+  <div class="col body empty" *ngIf="completedTasks.length == 0 && inprogressTasks.length == 0">
     <img class="image" src="src/assets/fresh-start.png">
     <p><strong>A fresh start</strong></p>
     <p>Anything to add?</p>
   </div>
 
-  <div class="col body" *ngIf="currentTaskList.tasks.length > 0">
-    <div class="col task" *ngFor="let task of currentTaskList.tasks">
+  <div class="col body" *ngIf="inprogressTasks.length > 0">
+    <div class="col task" *ngFor="let task of inprogressTasks">
       <div class="status">
         <input type="checkbox" [checked]="task.completed" (click)="toggleTaskStatus(task)">
       </div>
@@ -19,6 +19,22 @@
         {{task.name}}
       </div>
 
+    </div>
+  </div>
+
+  <div class="col body" *ngIf="completedTasks.length > 0">
+    <div class="col task completed" >
+      <div class="name">
+        Completed ({{completedTasks.length}})
+      </div>
+    </div>
+    <div class="col task" *ngFor="let task of completedTasks">
+      <div class="status">
+        <input type="checkbox" [checked]="task.completed" (click)="toggleTaskStatus(task)">
+      </div>
+      <div class="name">
+        {{task.name}}
+      </div>
     </div>
   </div>
 

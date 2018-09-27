@@ -13,8 +13,10 @@ import { ParentTask } from '../classes/ParentTask';
 })
 export class TaskListComponent implements OnInit {
 
+  private currentTaskList: TaskList;
+  public completedTasks: Array<ParentTask>;
+  public inprogressTasks: Array<ParentTask>;
   public addingNewtask = false;
-  public currentTaskList: TaskList;
   public newTask: ParentTask;
 
   constructor(private currentRoute: ActivatedRoute, private taskHttpService: TaskHttpService) { }
@@ -29,10 +31,10 @@ export class TaskListComponent implements OnInit {
 
     this.taskHttpService.getTaskList(taskListId).then(
       (taskList: TaskList) => {
-        this.currentTaskList = taskList;
+        this.update(taskList);
       }
     );
-    console.log(this.currentTaskList);
+
   }
 
   public addNewTask() {
@@ -44,7 +46,7 @@ export class TaskListComponent implements OnInit {
     if (this.isNewTaskValid()) {
       this.taskHttpService.saveTask(this.currentTaskList.id, this.newTask).then(
         (savedTask: ParentTask) => {
-          this.currentTaskList.tasks.push(savedTask);
+          this.inprogressTasks.push(savedTask);
         }
       );
     }
@@ -54,7 +56,20 @@ export class TaskListComponent implements OnInit {
 
   public toggleTaskStatus(task: ParentTask) {
     task.completed = !task.completed;
-    this.taskHttpService.toggleTaskStatus(this.currentTaskList.id, task);
+    this.taskHttpService.toggleTaskStatus(this.currentTaskList.id, task).then(
+      (taskList: TaskList) => {
+        this.update(taskList);
+      }
+    );
+
+  }
+
+  private update(taskList: TaskList) {
+    this.currentTaskList = taskList;
+    const grouped = this.currentTaskList.groupByCompletionStatus();
+    this.completedTasks = grouped[true] ? grouped[true] : new Array<ParentTask>();
+    this.inprogressTasks = grouped[false] ? grouped[false] : new Array<ParentTask>();
+
   }
 
   private isNewTaskValid() {

@@ -24,10 +24,17 @@
             text-align: center;
         }
 
+
+
         .task {
             height: 35px;
             line-height: 35px;
             border-bottom: solid 1px lightgray;
+
+            &.completed {
+                margin-top: 15px;
+                border-top: solid 1px lightgray;
+            }
 
             .status {
                 float :left;
