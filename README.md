@@ -1,6 +1,6 @@
 # NgTasks
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3. for the purposes of a interview project for Mobelux
+This repo was created for a interview project for Mobelux. The objective was to replicate the Google app "Task" (as much as possible) within a 8hr time window. And this was the result.
 
 # Pre-Req
 
